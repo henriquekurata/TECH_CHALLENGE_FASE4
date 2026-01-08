@@ -43,40 +43,47 @@ with tab1:
 with tab2:
     st.header("Análise Exploratória dos Dados")
     
-    # Adiciona espaçamento
     st.markdown("\n")
 
     # 1️⃣ Distribuição das classes de obesidade
     st.markdown("### Distribuição das classes de obesidade")
-    plt.figure(figsize=(6, 4))
+    plt.figure(figsize=(4, 3))
     sns.countplot(data=df, x="Obesity", palette="pastel", order=df['Obesity'].value_counts().index)
-    plt.title("Número de pacientes por nível de obesidade")
-    plt.xlabel("Nível de obesidade")
-    plt.ylabel("Contagem")
-    plt.xticks(rotation=30)
+    plt.title("Pacientes por nível de obesidade", fontsize=10)
+    plt.xlabel("Obesidade", fontsize=9)
+    plt.ylabel("Contagem", fontsize=9)
+    plt.xticks(rotation=30, fontsize=8)
+    plt.yticks(fontsize=8)
+    plt.tight_layout()
     st.pyplot(plt)
     
     st.markdown("\n")
 
     # 2️⃣ Obesidade x Frequência de Atividade Física (FAF)
     st.markdown("### Obesidade x Frequência de Atividade Física (FAF)")
-    plt.figure(figsize=(6, 4))
+    plt.figure(figsize=(4, 3))
     sns.boxplot(data=df, x="Obesity", y="FAF", palette="Set2")
-    plt.title("Distribuição da frequência de atividade física por nível de obesidade")
-    plt.xlabel("Nível de obesidade")
-    plt.ylabel("Atividade física (FAF)")
-    plt.xticks(rotation=30)
+    plt.title("FAF por nível de obesidade", fontsize=10)
+    plt.xlabel("Obesidade", fontsize=9)
+    plt.ylabel("FAF", fontsize=9)
+    plt.xticks(rotation=30, fontsize=8)
+    plt.yticks(fontsize=8)
+    plt.tight_layout()
     st.pyplot(plt)
     
     st.markdown("\n")
 
-    # 3️⃣ Scatter plot: Idade x Peso colorido por nível de obesidade
+    # 3️⃣ Scatter plot: Idade x Peso colorido por obesidade
     st.markdown("### Relação entre Idade e Peso")
-    plt.figure(figsize=(6, 4))
-    sns.scatterplot(data=df, x="Age", y="Weight", hue="Obesity", palette="bright", s=60)
-    plt.title("Idade vs Peso por nível de obesidade")
-    plt.xlabel("Idade")
-    plt.ylabel("Peso (kg)")
+    plt.figure(figsize=(4, 3))
+    sns.scatterplot(data=df, x="Age", y="Weight", hue="Obesity", palette="bright", s=40)
+    plt.title("Idade vs Peso por obesidade", fontsize=10)
+    plt.xlabel("Idade", fontsize=9)
+    plt.ylabel("Peso (kg)", fontsize=9)
+    plt.xticks(fontsize=8)
+    plt.yticks(fontsize=8)
+    plt.legend(fontsize=7, loc='upper right')
+    plt.tight_layout()
     st.pyplot(plt)
     
     st.markdown("\n")
@@ -85,17 +92,20 @@ with tab2:
     st.markdown("### Correlação entre variáveis preditivas")
     st.markdown("""
     O gráfico abaixo mostra a correlação entre as variáveis numéricas usadas no sistema preditivo.
-    Valores próximos de 1 ou -1 indicam forte correlação positiva ou negativa, respectivamente.
+    Valores próximos de 1 ou -1 indicam forte correlação positiva ou negativa.
     """)
     variaveis = ["Age", "Height", "Weight", "FCVC", "NCP", "CH2O", "FAF", "TUE"]
     dados_corr = df[variaveis]
     corr_matrix = dados_corr.corr()
 
-    plt.figure(figsize=(8, 5))
+    plt.figure(figsize=(5, 4))
     sns.heatmap(corr_matrix, annot=True, cmap="coolwarm", fmt=".2f", linewidths=0.5, cbar=True)
-    plt.title("Correlação entre variáveis do sistema preditivo")
+    plt.title("Correlação entre variáveis do sistema preditivo", fontsize=10)
+    plt.xticks(fontsize=8)
+    plt.yticks(fontsize=8)
     plt.tight_layout()
     st.pyplot(plt)
+
 
 
 # ===============================
