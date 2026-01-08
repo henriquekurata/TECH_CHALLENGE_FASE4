@@ -115,55 +115,55 @@ with tab2:
 # ===============================
 with tab3:
     st.header("Sistema Preditivo de Obesidade")
+    st.markdown("""
+    Preencha os dados do paciente abaixo e clique em **Prever Nível de Obesidade**.
+    """)
+    st.markdown("\n")
 
     with st.form("prediction_form"):
+        # Criação de 3 colunas para inputs
         col1, col2, col3 = st.columns(3)
 
+        # ---------------------
         # Coluna 1
+        # ---------------------
         with col1:
             Gender = st.selectbox("Gênero", ["Male", "Female"])
             Age = st.slider("Idade", 10, 80, 30)
             Height = st.slider("Altura (m)", 1.40, 2.10, 1.70)
             Weight = st.slider("Peso (kg)", 40.0, 160.0, 70.0)
 
+        # ---------------------
         # Coluna 2
+        # ---------------------
         with col2:
             family_history = st.selectbox("Histórico familiar de obesidade", ["yes", "no"])
             FAVC = st.selectbox("Consumo frequente de alimentos calóricos", ["yes", "no"])
 
-            # FCVC — Consumo de vegetais
             st.write("**Consumo de vegetais (FCVC)**")
-            st.write("Pouco = 1-2 porções/dia, Moderado = 3-4, Muito = 5+")
-            FCVC_cat = st.selectbox("Selecione o consumo de vegetais", ["Pouco", "Moderado", "Muito"])
-            FCVC = {"Pouco":1, "Moderado":2, "Muito":3}[FCVC_cat]
+            FCVC_cat = st.selectbox("Selecione o consumo", ["Pouco", "Moderado", "Muito"])
+            FCVC = {"Pouco": 1, "Moderado": 2, "Muito": 3}[FCVC_cat]
 
-            # NCP — Número de refeições principais
             st.write("**Número de refeições principais (NCP)**")
-            st.write("Pouco = 1 refeição, Moderado = 2-3, Muito = 4 ou mais")
-            NCP_cat = st.selectbox("Selecione o número de refeições principais", ["Pouco", "Moderado", "Muito"])
-            NCP = {"Pouco":1, "Moderado":2, "Muito":3}[NCP_cat]
+            NCP_cat = st.selectbox("Selecione o número de refeições", ["Pouco", "Moderado", "Muito"])
+            NCP = {"Pouco": 1, "Moderado": 2, "Muito": 3}[NCP_cat]
 
-        # Coluna 3
-        with col3:
-            # CH2O — Consumo diário de água
             st.write("**Consumo diário de água (CH2O)**")
-            st.write("Pouco = <1 L/dia, Moderado = 1-2 L/dia, Muito = >2 L/dia")
             CH2O_cat = st.selectbox("Selecione o consumo de água", ["Pouco", "Moderado", "Muito"])
-            CH2O = {"Pouco":1, "Moderado":2, "Muito":3}[CH2O_cat]
+            CH2O = {"Pouco": 1, "Moderado": 2, "Muito": 3}[CH2O_cat]
 
-            # FAF — Frequência de atividade física
+        # ---------------------
+        # Coluna 3
+        # ---------------------
+        with col3:
             st.write("**Frequência de atividade física (FAF)**")
-            st.write("Pouco = 0-1 vez/semana, Moderado = 2-3, Muito = 4+")
-            FAF_cat = st.selectbox("Selecione a frequência de atividade física", ["Pouco", "Moderado", "Muito"])
-            FAF = {"Pouco":0, "Moderado":1, "Muito":2}[FAF_cat]
+            FAF_cat = st.selectbox("Selecione a frequência", ["Pouco", "Moderado", "Muito"])
+            FAF = {"Pouco": 0, "Moderado": 1, "Muito": 2}[FAF_cat]
 
-            # TUE — Uso de tecnologia
             st.write("**Uso de tecnologia (TUE)**")
-            st.write("Pouco = 0-1h, Moderado = 1-2h, Muito = 2+ h")
-            TUE_cat = st.selectbox("Selecione o uso de tecnologia", ["Pouco", "Moderado", "Muito"])
-            TUE = {"Pouco":0, "Moderado":1, "Muito":2}[TUE_cat]
+            TUE_cat = st.selectbox("Selecione o uso", ["Pouco", "Moderado", "Muito"])
+            TUE = {"Pouco": 0, "Moderado": 1, "Muito": 2}[TUE_cat]
 
-            # Outras variáveis categóricas
             CALC = st.selectbox("Consumo de álcool", ["no", "Sometimes", "Frequently", "Always"])
             CAEC = st.selectbox("Alimentação entre refeições", ["no", "Sometimes", "Frequently", "Always"])
             SMOKE = st.selectbox("Fuma?", ["yes", "no"])
@@ -173,8 +173,9 @@ with tab3:
                 ["Public_Transportation", "Walking", "Automobile", "Motorbike", "Bike"]
             )
 
-        # Botão de previsão
+        st.markdown("\n")
         submitted = st.form_submit_button("Prever Nível de Obesidade")
+
         if submitted:
             input_data = pd.DataFrame([{
                 "Gender": Gender,
@@ -194,6 +195,8 @@ with tab3:
                 "SCC": SCC,
                 "MTRANS": MTRANS
             }])
+
+            # Previsão usando o modelo carregado
             prediction = best_model.predict(input_data)[0]
             st.success(f"✅ O nível de obesidade previsto é: **{prediction}**")
 
