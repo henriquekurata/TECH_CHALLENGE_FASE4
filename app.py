@@ -46,21 +46,39 @@ with tab1:
 
 
 
+
 # ABA 2 — ANÁLISE EXPLORATÓRIA
 with tab2:
-    st.header("Análise Exploratória dos Dados")
+    st.markdown("""
+    <div style="
+        background-color: #f0f2f6; 
+        padding: 10px; 
+        border-radius: 8px;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    ">
+        <h2 style="color: #0f4c81; font-weight: bold;">Análise Exploratória dos Dados</h2>
+    </div>
+    """, unsafe_allow_html=True)
+
     st.markdown("\n")
 
-    # Criar duas colunas
+    # ===== Criar duas colunas =====
     col1, col2 = st.columns(2)
 
+    # ===== Mapear categorias numéricas para labels do dicionário =====
+    df["FCVC_cat"] = df["FCVC"].round().map({1: "Raramente", 2: "Às vezes", 3: "Sempre"})
+    df["NCP_cat"] = df["NCP"].round().map({1: "Uma", 2: "Duas", 3: "Três", 4: "Quatro ou mais"})
+    df["CH2O_cat"] = df["CH2O"].round().map({1: "<1 L/dia", 2: "1–2 L/dia", 3: ">2 L/dia"})
+    df["FAF_cat"] = df["FAF"].round().map({0: "Nenhuma", 1: "1–2×/sem", 2: "3–4×/sem", 3: "5×/sem ou mais"})
+    df["TUE_cat"] = df["TUE"].round().map({0: "0–2 h/dia", 1: "3–5 h/dia", 2: ">5 h/dia"})
 
-    # Coluna 1
+    # ===== Coluna 1 =====
     with col1:
         # Distribuição das classes de obesidade
         st.markdown("### Distribuição das classes de obesidade")
         plt.figure(figsize=(4, 3))
-        sns.countplot(data=df, x="Obesity", palette="pastel", order=df['Obesity'].value_counts().index)
+        sns.countplot(data=df, x="Obesity", palette="pastel",
+                      order=df['Obesity'].value_counts().index)
         plt.title("Pacientes por obesidade", fontsize=10)
         plt.xlabel("Obesidade", fontsize=9)
         plt.ylabel("Contagem", fontsize=9)
@@ -84,16 +102,15 @@ with tab2:
         plt.tight_layout()
         st.pyplot(plt)
 
-    
-    # Coluna 2
+    # ===== Coluna 2 =====
     with col2:
         # Obesidade x Frequência de Atividade Física (FAF)
         st.markdown("### Obesidade x Atividade Física")
         plt.figure(figsize=(4, 3))
-        sns.boxplot(data=df, x="Obesity", y="FAF", palette="Set2")
+        sns.boxplot(data=df, x="Obesity", y="FAF_cat", palette="Set2")
         plt.title("FAF por obesidade", fontsize=10)
         plt.xlabel("Obesidade", fontsize=9)
-        plt.ylabel("FAF", fontsize=9)
+        plt.ylabel("Frequência de Atividade Física", fontsize=9)
         plt.xticks(rotation=30, fontsize=8)
         plt.yticks(fontsize=8)
         plt.tight_layout()
@@ -102,7 +119,7 @@ with tab2:
         st.markdown("\n")
 
         # Heatmap de correlação
-        st.markdown("### Correlação entre variáveis")
+        st.markdown("### Correlação entre variáveis numéricas")
         variaveis = ["Age", "Height", "Weight", "FCVC", "NCP", "CH2O", "FAF", "TUE"]
         dados_corr = df[variaveis]
         corr_matrix = dados_corr.corr()
