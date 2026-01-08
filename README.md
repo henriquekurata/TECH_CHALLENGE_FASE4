@@ -1,4 +1,4 @@
-# 🧠 Sistema Preditivo de Obesidade
+# Sistema Preditivo de Obesidade
 
 Este projeto foi desenvolvido como parte do **Tech Challenge – Fase 4 (Data Analytics)**,
 com o objetivo de criar um sistema preditivo para **auxiliar a equipe médica
@@ -6,14 +6,14 @@ na identificação do nível de obesidade de pacientes**, utilizando Machine Lea
 
 ---
 
-## 🎯 Objetivo
+## Objetivo
 Desenvolver um modelo de Machine Learning capaz de prever o nível de obesidade
 com base em dados físicos, demográficos e comportamentais, entregando uma
 aplicação interativa para apoio à tomada de decisão clínica.
 
 ---
 
-## 📊 Base de Dados
+## Base de Dados
 Dataset: `Obesity.csv`
 
 Variáveis consideradas:
@@ -24,11 +24,11 @@ Variáveis consideradas:
 - Histórico familiar
 
 Variável alvo:
-- `Obesity_level` (classificação multiclasse)
+- `Obesity` (classificação multiclasse)
 
 ---
 
-## ⚙️ Pipeline de Machine Learning
+## Pipeline de Machine Learning
 O projeto utiliza um pipeline completo com:
 - Tratamento de variáveis numéricas (StandardScaler)
 - Codificação de variáveis categóricas (OneHotEncoder)
@@ -44,16 +44,16 @@ por apresentar o melhor desempenho, com acurácia superior a 85%.
 
 ---
 
-## 🧠 Sistema Preditivo
+## Sistema Preditivo
 A aplicação permite que o usuário insira dados de um paciente
 e receba, em tempo real, a previsão do nível de obesidade.
 
-⚠️ Este sistema é uma ferramenta de **apoio à decisão clínica**
+Este sistema é uma ferramenta de **apoio à decisão clínica**
 e não substitui o diagnóstico médico.
 
 ---
 
-## 📈 Dashboard Analítico
+## Dashboard Analítico
 O sistema conta com uma visão analítica interativa que apresenta:
 - Distribuição dos níveis de obesidade
 - Relação entre atividade física e obesidade
@@ -62,24 +62,26 @@ O sistema conta com uma visão analítica interativa que apresenta:
 
 ---
 
-## 🚀 Deploy
+## Deploy
 A aplicação foi desenvolvida em **Streamlit** e está disponível em:
 
-🔗 **Link da aplicação:**  
-(cole aqui o link do Streamlit Cloud)
+**Link da aplicação:**  
+(https://tech-challenge-obesidade-3h6jtjyn4lqbpaerdj2buk.streamlit.app/)
 
 ---
 
-## 🎥 Apresentação
+## Apresentação
 Foi gravado um vídeo demonstrando:
 - Estratégia adotada
 - Análise dos dados
 - Funcionamento do sistema preditivo
 - Impacto do projeto para a área da saúde
-
+- 
+**Link da apresentação:**  
+()
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 - Python
 - Pandas
 - Scikit-learn
