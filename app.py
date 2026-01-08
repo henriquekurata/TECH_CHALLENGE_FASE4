@@ -58,8 +58,8 @@ with tab1:
         st.subheader("Distribuição dos níveis de obesidade")
         fig1, ax1 = plt.subplots()
         sns.countplot(
-            y=df["Obesity_level"],
-            order=df["Obesity_level"].value_counts().index,
+            y=df["Obesity"],  # alterado de Obesity_level para Obesity
+            order=df["Obesity"].value_counts().index,
             ax=ax1
         )
         st.pyplot(fig1)
@@ -68,7 +68,7 @@ with tab1:
         st.subheader("Atividade física x Obesidade")
         fig2, ax2 = plt.subplots()
         sns.boxplot(
-            x="Obesity_level",
+            x="Obesity",  # alterado de Obesity_level para Obesity
             y="FAF",
             data=df,
             ax=ax2
@@ -82,7 +82,7 @@ with tab1:
         data=df,
         x="Age",
         y="Weight",
-        hue="Obesity_level",
+        hue="Obesity",  # alterado de Obesity_level para Obesity
         alpha=0.6,
         ax=ax3
     )
@@ -114,7 +114,6 @@ with tab2:
             FAF = st.slider("Frequência de atividade física", 0.0, 3.0, 1.0)
             TUE = st.slider("Uso de tecnologia (horas/dia)", 0.0, 2.0, 1.0)
             CALC = st.selectbox("Consumo de álcool", ["no", "Sometimes", "Frequently", "Always"])
-
             CAEC = st.selectbox("Alimentação entre refeições", ["no", "Sometimes", "Frequently", "Always"])
             SMOKE = st.selectbox("Fuma?", ["yes", "no"])
             SCC = st.selectbox("Monitora calorias?", ["yes", "no"])
