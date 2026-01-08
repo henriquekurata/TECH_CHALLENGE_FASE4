@@ -46,7 +46,7 @@ with tab2:
     # 1️⃣ Distribuição das classes de obesidade
     st.markdown("### Distribuição das classes de obesidade")
     plt.figure(figsize=(8, 5))
-    sns.countplot(data=df, x="Obesity_level", palette="pastel", order=df['Obesity_level'].value_counts().index)
+    sns.countplot(data=df, x="Obesity", palette="pastel", order=df['Obesity'].value_counts().index)
     plt.title("Número de pacientes por nível de obesidade")
     plt.xlabel("Nível de obesidade")
     plt.ylabel("Contagem")
@@ -56,7 +56,7 @@ with tab2:
     # 2️⃣ Boxplot de Peso x Nível de obesidade
     st.markdown("### Peso por nível de obesidade")
     plt.figure(figsize=(8, 5))
-    sns.boxplot(data=df, x="Obesity_level", y="Weight", palette="Set2")
+    sns.boxplot(data=df, x="Obesity", y="Weight", palette="Set2")
     plt.title("Distribuição do peso por nível de obesidade")
     plt.xlabel("Nível de obesidade")
     plt.ylabel("Peso (kg)")
@@ -66,7 +66,7 @@ with tab2:
     # 3️⃣ Scatter plot: Idade x Peso colorido por nível de obesidade
     st.markdown("### Relação entre Idade e Peso")
     plt.figure(figsize=(8, 5))
-    sns.scatterplot(data=df, x="Age", y="Weight", hue="Obesity_level", palette="bright", s=80)
+    sns.scatterplot(data=df, x="Age", y="Weight", hue="Obesity", palette="bright", s=80)
     plt.title("Idade vs Peso por nível de obesidade")
     plt.xlabel("Idade")
     plt.ylabel("Peso (kg)")
