@@ -231,5 +231,5 @@ with tab4:
         - Atividade física (FAF)  
         - Hábitos alimentares (FAVC, FCVC, CAEC, CALC)  
         - Histórico familiar (family_history)
-        """
+        """)
   
