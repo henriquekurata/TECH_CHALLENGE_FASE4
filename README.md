@@ -82,9 +82,5 @@ Foi gravado um vídeo demonstrando:
 ---
 
 ## Tecnologias Utilizadas
-- Python
-- Pandas
-- Scikit-learn
+- Google Collab
 - Streamlit
-- Matplotlib
-- Seaborn
