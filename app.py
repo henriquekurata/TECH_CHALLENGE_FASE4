@@ -20,45 +20,7 @@ tab1, tab2, tab3, tab4 = st.tabs([
     "Análise Exploratória", 
     "Sistema Preditivo", 
     "Conclusões"
-])
 
-# ===============================
-# Estilo para os títulos dentro das abas
-# ===============================
-titulo_estilo = """
-    <div style="
-        background-color: #f0f2f6; 
-        padding: 10px; 
-        border-radius: 8px;
-        box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
-    ">
-        <h2 style="color: #0f4c81; font-weight: bold;">{}</h2>
-    </div>
-"""
-
-# Exemplo de uso dentro de cada aba:
-with tab1:
-    st.markdown(titulo_estilo.format("Problema de Negócio"), unsafe_allow_html=True)
-    st.markdown("""
-    Aqui você explica o contexto do problema, a importância da obesidade, a base de dados usada e os objetivos do sistema preditivo.
-    """)
-
-with tab2:
-    st.markdown(titulo_estilo.format("Análise Exploratória"), unsafe_allow_html=True)
-    st.markdown("Gráficos e insights sobre os dados entram aqui.")
-
-with tab3:
-    st.markdown(titulo_estilo.format("Sistema Preditivo"), unsafe_allow_html=True)
-    st.markdown("Formulário para previsão de obesidade aqui.")
-
-with tab4:
-    st.markdown(titulo_estilo.format("Conclusões"), unsafe_allow_html=True)
-    st.markdown("Resumo do projeto, insights do modelo e recomendações.")
-
-
-# ===============================
-# ABA 1 — PROBLEMA DE NEGÓCIO
-# ===============================
 # ===============================
 # ABA 1 — PROBLEMA DE NEGÓCIO
 # ===============================
