@@ -117,7 +117,7 @@ with tab3:
     st.header("Sistema Preditivo de Obesidade")
     st.markdown("""
     Preencha os dados do paciente abaixo e clique em **Prever Nível de Obesidade**.
-    As opções "Pouco", "Moderado" e "Muito" incluem valores de referência.
+    As opções "Pouco", "Moderado" e "Muito" incluem valores de referência para facilitar a escolha.
     """)
     st.markdown("\n")
 
@@ -128,77 +128,80 @@ with tab3:
         # Coluna 1 — Dados Pessoais
         # ---------------------
         with col1:
-            Gender = st.selectbox("Gênero", ["Male", "Female"])
-            Age = st.slider("Idade", 10, 80, 30)
-            Height = st.slider("Altura (m)", 1.40, 2.10, 1.70)
-            Weight = st.slider("Peso (kg)", 40.0, 160.0, 70.0)
+            st.subheader("Dados Pessoais")
+            genero = st.selectbox("Gênero", ["Masculino", "Feminino"])
+            idade = st.slider("Idade", 10, 80, 30)
+            altura = st.slider("Altura (m)", 1.40, 2.10, 1.70)
+            peso = st.slider("Peso (kg)", 40.0, 160.0, 70.0)
 
         # ---------------------
         # Coluna 2 — Hábitos Alimentares
         # ---------------------
         with col2:
-            family_history = st.selectbox("Histórico familiar de obesidade", ["yes", "no"])
-            FAVC = st.selectbox("Consumo frequente de alimentos calóricos", ["yes", "no"])
+            st.subheader("Hábitos Alimentares")
+            historico_familiar = st.selectbox("Histórico familiar de obesidade", ["sim", "não"])
+            consumo_calorico = st.selectbox("Consumo frequente de alimentos calóricos", ["sim", "não"])
 
-            FCVC_options = ["Pouco (1 vez/dia)", "Moderado (2 vezes/dia)", "Muito (3 vezes/dia)"]
-            FCVC_cat = st.selectbox("Consumo de vegetais (FCVC)", FCVC_options)
-            FCVC = {"Pouco (1 vez/dia)": 1, "Moderado (2 vezes/dia)": 2, "Muito (3 vezes/dia)": 3}[FCVC_cat]
+            fcvc_opcoes = ["Pouco (1 vez/dia)", "Moderado (2 vezes/dia)", "Muito (3 vezes/dia)"]
+            fcvc_cat = st.selectbox("Consumo de vegetais (FCVC)", fcvc_opcoes)
+            fcvc = {"Pouco (1 vez/dia)": 1, "Moderado (2 vezes/dia)": 2, "Muito (3 vezes/dia)": 3}[fcvc_cat]
 
-            NCP_options = ["Pouco (1 refeição)", "Moderado (2-3 refeições)", "Muito (4 refeições)"]
-            NCP_cat = st.selectbox("Número de refeições (NCP)", NCP_options)
-            NCP = {"Pouco (1 refeição)": 1, "Moderado (2-3 refeições)": 2, "Muito (4 refeições)": 3}[NCP_cat]
+            ncp_opcoes = ["Pouco (1 refeição)", "Moderado (2-3 refeições)", "Muito (4 refeições)"]
+            ncp_cat = st.selectbox("Número de refeições (NCP)", ncp_opcoes)
+            ncp = {"Pouco (1 refeição)": 1, "Moderado (2-3 refeições)": 2, "Muito (4 refeições)": 3}[ncp_cat]
 
-            CH2O_options = ["Pouco (1 copo/dia)", "Moderado (2 copos/dia)", "Muito (3 copos/dia)"]
-            CH2O_cat = st.selectbox("Consumo diário de água (CH2O)", CH2O_options)
-            CH2O = {"Pouco (1 copo/dia)": 1, "Moderado (2 copos/dia)": 2, "Muito (3 copos/dia)": 3}[CH2O_cat]
+            ch2o_opcoes = ["Pouco (1 copo/dia)", "Moderado (2 copos/dia)", "Muito (3 copos/dia)"]
+            ch2o_cat = st.selectbox("Consumo diário de água (CH2O)", ch2o_opcoes)
+            ch2o = {"Pouco (1 copo/dia)": 1, "Moderado (2 copos/dia)": 2, "Muito (3 copos/dia)": 3}[ch2o_cat]
 
         # ---------------------
         # Coluna 3 — Atividade e Estilo de Vida
         # ---------------------
         with col3:
-            FAF_options = ["Pouco (0-1x/semana)", "Moderado (2x/semana)", "Muito (3x+/semana)"]
-            FAF_cat = st.selectbox("Atividade física (FAF)", FAF_options)
-            FAF = {"Pouco (0-1x/semana)": 0, "Moderado (2x/semana)": 1, "Muito (3x+/semana)": 2}[FAF_cat]
+            st.subheader("Atividade e Estilo de Vida")
+            faf_opcoes = ["Pouco (0-1x/semana)", "Moderado (2x/semana)", "Muito (3x+/semana)"]
+            faf_cat = st.selectbox("Atividade física (FAF)", faf_opcoes)
+            faf = {"Pouco (0-1x/semana)": 0, "Moderado (2x/semana)": 1, "Muito (3x+/semana)": 2}[faf_cat]
 
-            TUE_options = ["Pouco (0-1h/dia)", "Moderado (1-2h/dia)", "Muito (3h+/dia)"]
-            TUE_cat = st.selectbox("Uso de tecnologia (TUE)", TUE_options)
-            TUE = {"Pouco (0-1h/dia)": 0, "Moderado (1-2h/dia)": 1, "Muito (3h+/dia)": 2}[TUE_cat]
+            tue_opcoes = ["Pouco (0-1h/dia)", "Moderado (1-2h/dia)", "Muito (3h+/dia)"]
+            tue_cat = st.selectbox("Uso de tecnologia (TUE)", tue_opcoes)
+            tue = {"Pouco (0-1h/dia)": 0, "Moderado (1-2h/dia)": 1, "Muito (3h+/dia)": 2}[tue_cat]
 
-            CALC = st.selectbox("Consumo de álcool", ["no", "Sometimes", "Frequently", "Always"])
-            CAEC = st.selectbox("Alimentação entre refeições", ["no", "Sometimes", "Frequently", "Always"])
-            SMOKE = st.selectbox("Fuma?", ["yes", "no"])
-            SCC = st.selectbox("Monitora calorias?", ["yes", "no"])
-            MTRANS = st.selectbox(
+            calc = st.selectbox("Consumo de álcool", ["não", "Às vezes", "Frequentemente", "Sempre"])
+            caec = st.selectbox("Alimentação entre refeições", ["não", "Às vezes", "Frequentemente", "Sempre"])
+            fuma = st.selectbox("Fuma?", ["sim", "não"])
+            monitora_calorias = st.selectbox("Monitora calorias?", ["sim", "não"])
+            transporte = st.selectbox(
                 "Meio de transporte",
-                ["Public_Transportation", "Walking", "Automobile", "Motorbike", "Bike"]
+                ["Transporte Público", "Caminhada", "Automóvel", "Moto", "Bicicleta"]
             )
 
         st.markdown("\n")
-        submitted = st.form_submit_button("Prever Nível de Obesidade")
+        botao = st.form_submit_button("Prever Nível de Obesidade")
 
-        if submitted:
+        if botao:
             input_data = pd.DataFrame([{
-                "Gender": Gender,
-                "Age": Age,
-                "Height": Height,
-                "Weight": Weight,
-                "family_history": family_history,
-                "FAVC": FAVC,
-                "FCVC": FCVC,
-                "NCP": NCP,
-                "CH2O": CH2O,
-                "FAF": FAF,
-                "TUE": TUE,
-                "CALC": CALC,
-                "CAEC": CAEC,
-                "SMOKE": SMOKE,
-                "SCC": SCC,
-                "MTRANS": MTRANS
+                "Gender": genero,
+                "Age": idade,
+                "Height": altura,
+                "Weight": peso,
+                "family_history": historico_familiar,
+                "FAVC": consumo_calorico,
+                "FCVC": fcvc,
+                "NCP": ncp,
+                "CH2O": ch2o,
+                "FAF": faf,
+                "TUE": tue,
+                "CALC": calc,
+                "CAEC": caec,
+                "SMOKE": fuma,
+                "SCC": monitora_calorias,
+                "MTRANS": transporte
             }])
 
-            # Previsão usando o modelo carregado
-            prediction = best_model.predict(input_data)[0]
-            st.success(f"✅ O nível de obesidade previsto é: **{prediction}**")
+            previsao = best_model.predict(input_data)[0]
+            st.success(f"✅ O nível de obesidade previsto é: **{previsao}**")
+
 
 
 # ===============================
