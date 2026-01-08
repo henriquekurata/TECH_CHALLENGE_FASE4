@@ -117,11 +117,11 @@ with tab3:
     st.header("Sistema Preditivo de Obesidade")
     st.markdown("""
     Preencha os dados do paciente abaixo e clique em **Prever Nível de Obesidade**.
+    As opções de "Pouco", "Moderado" e "Muito" têm valores de referência para facilitar a escolha.
     """)
     st.markdown("\n")
 
     with st.form("prediction_form"):
-        # Criação de 3 colunas para inputs
         col1, col2, col3 = st.columns(3)
 
         # ---------------------
@@ -140,29 +140,29 @@ with tab3:
             family_history = st.selectbox("Histórico familiar de obesidade", ["yes", "no"])
             FAVC = st.selectbox("Consumo frequente de alimentos calóricos", ["yes", "no"])
 
-            st.write("**Consumo de vegetais (FCVC)**")
-            FCVC_cat = st.selectbox("Selecione o consumo", ["Pouco", "Moderado", "Muito"])
-            FCVC = {"Pouco": 1, "Moderado": 2, "Muito": 3}[FCVC_cat]
+            FCVC_options = ["Pouco (1 vez/dia)", "Moderado (2 vezes/dia)", "Muito (3 vezes/dia)"]
+            FCVC_cat = st.selectbox("Consumo de vegetais (FCVC)", FCVC_options)
+            FCVC = {"Pouco (1 vez/dia)": 1, "Moderado (2 vezes/dia)": 2, "Muito (3 vezes/dia)": 3}[FCVC_cat]
 
-            st.write("**Número de refeições principais (NCP)**")
-            NCP_cat = st.selectbox("Selecione o número de refeições", ["Pouco", "Moderado", "Muito"])
-            NCP = {"Pouco": 1, "Moderado": 2, "Muito": 3}[NCP_cat]
+            NCP_options = ["Pouco (1 refeição)", "Moderado (2-3 refeições)", "Muito (4 refeições)"]
+            NCP_cat = st.selectbox("Número de refeições principais (NCP)", NCP_options)
+            NCP = {"Pouco (1 refeição)": 1, "Moderado (2-3 refeições)": 2, "Muito (4 refeições)": 3}[NCP_cat]
 
-            st.write("**Consumo diário de água (CH2O)**")
-            CH2O_cat = st.selectbox("Selecione o consumo de água", ["Pouco", "Moderado", "Muito"])
-            CH2O = {"Pouco": 1, "Moderado": 2, "Muito": 3}[CH2O_cat]
+            CH2O_options = ["Pouco (1 copo/dia)", "Moderado (2 copos/dia)", "Muito (3 copos/dia)"]
+            CH2O_cat = st.selectbox("Consumo diário de água (CH2O)", CH2O_options)
+            CH2O = {"Pouco (1 copo/dia)": 1, "Moderado (2 copos/dia)": 2, "Muito (3 copos/dia)": 3}[CH2O_cat]
 
         # ---------------------
         # Coluna 3
         # ---------------------
         with col3:
-            st.write("**Frequência de atividade física (FAF)**")
-            FAF_cat = st.selectbox("Selecione a frequência", ["Pouco", "Moderado", "Muito"])
-            FAF = {"Pouco": 0, "Moderado": 1, "Muito": 2}[FAF_cat]
+            FAF_options = ["Pouco (0-1x/semana)", "Moderado (2x/semana)", "Muito (3x+/semana)"]
+            FAF_cat = st.selectbox("Frequência de atividade física (FAF)", FAF_options)
+            FAF = {"Pouco (0-1x/semana)": 0, "Moderado (2x/semana)": 1, "Muito (3x+/semana)": 2}[FAF_cat]
 
-            st.write("**Uso de tecnologia (TUE)**")
-            TUE_cat = st.selectbox("Selecione o uso", ["Pouco", "Moderado", "Muito"])
-            TUE = {"Pouco": 0, "Moderado": 1, "Muito": 2}[TUE_cat]
+            TUE_options = ["Pouco (0-1h/dia)", "Moderado (1-2h/dia)", "Muito (3h+/dia)"]
+            TUE_cat = st.selectbox("Uso de tecnologia (TUE)", TUE_options)
+            TUE = {"Pouco (0-1h/dia)": 0, "Moderado (1-2h/dia)": 1, "Muito (3h+/dia)": 2}[TUE_cat]
 
             CALC = st.selectbox("Consumo de álcool", ["no", "Sometimes", "Frequently", "Always"])
             CAEC = st.selectbox("Alimentação entre refeições", ["no", "Sometimes", "Frequently", "Always"])
@@ -199,6 +199,7 @@ with tab3:
             # Previsão usando o modelo carregado
             prediction = best_model.predict(input_data)[0]
             st.success(f"✅ O nível de obesidade previsto é: **{prediction}**")
+
 
 # ===============================
 # ABA 4 — CONCLUSÕES
