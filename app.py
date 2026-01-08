@@ -43,13 +43,36 @@ with tab1:
 with tab2:
     st.header("Análise Exploratória dos Dados")
 
+    # 1️⃣ Distribuição das classes de obesidade
     st.markdown("### Distribuição das classes de obesidade")
-    st.bar_chart(df['Obesity'].value_counts())
+    plt.figure(figsize=(8, 5))
+    sns.countplot(data=df, x="Obesity_level", palette="pastel", order=df['Obesity_level'].value_counts().index)
+    plt.title("Número de pacientes por nível de obesidade")
+    plt.xlabel("Nível de obesidade")
+    plt.ylabel("Contagem")
+    plt.xticks(rotation=30)
+    st.pyplot(plt)
 
-    st.markdown("### Estatísticas gerais das variáveis numéricas")
-    st.dataframe(df.describe())
+    # 2️⃣ Boxplot de Peso x Nível de obesidade
+    st.markdown("### Peso por nível de obesidade")
+    plt.figure(figsize=(8, 5))
+    sns.boxplot(data=df, x="Obesity_level", y="Weight", palette="Set2")
+    plt.title("Distribuição do peso por nível de obesidade")
+    plt.xlabel("Nível de obesidade")
+    plt.ylabel("Peso (kg)")
+    plt.xticks(rotation=30)
+    st.pyplot(plt)
 
-    # Heatmap de correlação
+    # 3️⃣ Scatter plot: Idade x Peso colorido por nível de obesidade
+    st.markdown("### Relação entre Idade e Peso")
+    plt.figure(figsize=(8, 5))
+    sns.scatterplot(data=df, x="Age", y="Weight", hue="Obesity_level", palette="bright", s=80)
+    plt.title("Idade vs Peso por nível de obesidade")
+    plt.xlabel("Idade")
+    plt.ylabel("Peso (kg)")
+    st.pyplot(plt)
+
+    # 4️⃣ Heatmap de correlação das variáveis numéricas
     st.markdown("### Correlação entre variáveis preditivas")
     st.markdown("""
     O gráfico abaixo mostra a correlação entre as variáveis numéricas usadas no sistema preditivo.
@@ -60,10 +83,11 @@ with tab2:
     corr_matrix = dados_corr.corr()
 
     plt.figure(figsize=(10, 6))
-    sns.heatmap(corr_matrix, annot=True, cmap="coolwarm", fmt=".2f")
+    sns.heatmap(corr_matrix, annot=True, cmap="coolwarm", fmt=".2f", linewidths=0.5, cbar=True)
     plt.title("Correlação entre variáveis do sistema preditivo")
     plt.tight_layout()
     st.pyplot(plt)
+
 
 # ===============================
 # ABA 3 — SISTEMA PREDITIVO
