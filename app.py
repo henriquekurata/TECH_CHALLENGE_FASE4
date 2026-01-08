@@ -115,58 +115,66 @@ with tab2:
         st.pyplot(plt)
 
 
+
 # ABA 3 — SISTEMA PREDITIVO
 with tab3:
-    st.header("Sistema Preditivo de Obesidade")
+    st.markdown("""
+    <div style="
+        background-color: #f0f2f6; 
+        padding: 10px; 
+        border-radius: 8px;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    ">
+        <h2 style="color: #0f4c81; font-weight: bold;">Sistema Preditivo de Obesidade</h2>
+    </div>
+    """, unsafe_allow_html=True)
+
     st.markdown("""
     Preencha os dados do paciente abaixo e clique em **Prever Nível de Obesidade**.
-    As opções "Pouco", "Moderado" e "Muito" incluem valores de referência para facilitar a escolha.
+    As opções apresentam **valores de referência** para facilitar a escolha.
     """)
+
     st.markdown("\n")
 
     with st.form("prediction_form"):
         col1, col2, col3 = st.columns(3)
 
-        
-        # Coluna 1 — Dados Pessoais
+        #Coluna 1 — Dados Pessoais 
         with col1:
             st.subheader("Dados Pessoais")
             genero = st.selectbox("Gênero", ["Masculino", "Feminino"])
-            idade = st.slider("Idade", 10, 80, 30)
-            altura = st.slider("Altura (m)", 1.40, 2.10, 1.70)
-            peso = st.slider("Peso (kg)", 40.0, 160.0, 70.0)
+            idade = st.slider("Idade (anos)", 14, 61, 30)
+            altura = st.slider("Altura (m)", 1.45, 1.98, 1.70)
+            peso = st.slider("Peso (kg)", 39, 173, 70)
 
-        
-        # Coluna 2 — Hábitos Alimentares
+        #Coluna 2 — Hábitos Alimentares 
         with col2:
             st.subheader("Hábitos Alimentares")
             historico_familiar = st.selectbox("Histórico familiar de obesidade", ["sim", "não"])
             consumo_calorico = st.selectbox("Consumo frequente de alimentos calóricos", ["sim", "não"])
 
-            fcvc_opcoes = ["Pouco (1 vez/dia)", "Moderado (2 vezes/dia)", "Muito (3 vezes/dia)"]
+            fcvc_opcoes = ["Raramente (1 vez/dia)", "Às vezes (2 vezes/dia)", "Sempre (3 vezes/dia)"]
             fcvc_cat = st.selectbox("Consumo de vegetais (FCVC)", fcvc_opcoes)
-            fcvc = {"Pouco (1 vez/dia)": 1, "Moderado (2 vezes/dia)": 2, "Muito (3 vezes/dia)": 3}[fcvc_cat]
+            fcvc = {"Raramente (1 vez/dia)": 1, "Às vezes (2 vezes/dia)": 2, "Sempre (3 vezes/dia)": 3}[fcvc_cat]
 
-            ncp_opcoes = ["Pouco (1 refeição)", "Moderado (2-3 refeições)", "Muito (4 refeições)"]
+            ncp_opcoes = ["Uma (1 refeição)", "Duas (2 refeições)", "Três (3 refeições)", "Quatro ou mais (4+)"]
             ncp_cat = st.selectbox("Número de refeições (NCP)", ncp_opcoes)
-            ncp = {"Pouco (1 refeição)": 1, "Moderado (2-3 refeições)": 2, "Muito (4 refeições)": 3}[ncp_cat]
+            ncp = {"Uma (1 refeição)": 1, "Duas (2 refeições)": 2, "Três (3 refeições)": 3, "Quatro ou mais (4+)": 4}[ncp_cat]
 
-            # Consumo de água em litros
-            ch2o_opcoes = ["Pouco (0,5 L/dia)", "Moderado (1,0 L/dia)", "Muito (1,5 L/dia)"]
+            ch2o_opcoes = ["<1 L/dia", "1–2 L/dia", ">2 L/dia"]
             ch2o_cat = st.selectbox("Consumo diário de água (CH2O)", ch2o_opcoes)
-            ch2o = {"Pouco (0,5 L/dia)": 1, "Moderado (1,0 L/dia)": 2, "Muito (1,5 L/dia)": 3}[ch2o_cat]
+            ch2o = {"<1 L/dia": 1, "1–2 L/dia": 2, ">2 L/dia": 3}[ch2o_cat]
 
-       
-        # Coluna 3 — Atividade e Estilo de Vida
+        #Coluna 3 — Atividade e Estilo de Vida 
         with col3:
             st.subheader("Atividade e Estilo de Vida")
-            faf_opcoes = ["Pouco (0-1x/semana)", "Moderado (2x/semana)", "Muito (3x+/semana)"]
+            faf_opcoes = ["Nenhuma (0)", "1–2×/sem", "3–4×/sem", "5×/sem ou mais"]
             faf_cat = st.selectbox("Atividade física (FAF)", faf_opcoes)
-            faf = {"Pouco (0-1x/semana)": 0, "Moderado (2x/semana)": 1, "Muito (3x+/semana)": 2}[faf_cat]
+            faf = {"Nenhuma (0)": 0, "1–2×/sem": 1, "3–4×/sem": 2, "5×/sem ou mais": 3}[faf_cat]
 
-            tue_opcoes = ["Pouco (0-1h/dia)", "Moderado (1-2h/dia)", "Muito (3h+/dia)"]
+            tue_opcoes = ["0–2 h/dia", "3–5 h/dia", ">5 h/dia"]
             tue_cat = st.selectbox("Uso de tecnologia (TUE)", tue_opcoes)
-            tue = {"Pouco (0-1h/dia)": 0, "Moderado (1-2h/dia)": 1, "Muito (3h+/dia)": 2}[tue_cat]
+            tue = {"0–2 h/dia": 0, "3–5 h/dia": 1, ">5 h/dia": 2}[tue_cat]
 
             calc = st.selectbox("Consumo de álcool", ["não", "Às vezes", "Frequentemente", "Sempre"])
             caec = st.selectbox("Alimentação entre refeições", ["não", "Às vezes", "Frequentemente", "Sempre"])
@@ -174,7 +182,7 @@ with tab3:
             monitora_calorias = st.selectbox("Monitora calorias?", ["sim", "não"])
             transporte = st.selectbox(
                 "Meio de transporte",
-                ["Transporte Público", "Caminhada", "Automóvel", "Moto", "Bicicleta"]
+                ["Automóvel", "Moto", "Bicicleta", "Transporte Público", "Caminhada"]
             )
 
         st.markdown("\n")
@@ -202,6 +210,7 @@ with tab3:
 
             previsao = best_model.predict(input_data)[0]
             st.success(f"O nível de obesidade previsto é: **{previsao}**")
+
 
 
 
